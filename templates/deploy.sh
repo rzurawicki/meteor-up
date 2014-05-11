@@ -37,6 +37,8 @@ sudo stop <%= appName %> || :
 sudo start <%= appName %> || :
 
 revert_app (){
+  echo "'<%= appName %>' Application log:" 1>&2
+  sudo tail -c 900 /var/log/upstart/<%= appName %>.log 1>&2
   if [[ -d old_app ]]; then
     sudo rm -rf app
     sudo mv old_app app
